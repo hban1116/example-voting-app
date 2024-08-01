@@ -31,6 +31,7 @@ steps:
       - |
         git config --global user.email "harshitbansal1116@gmail.com"
         git config --global user.name "hban1116"
+        git remote set-url origin https://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@github.com/hban1116/example-voting-app.git
     dir: '/workspace/repo'
   # Step 4: Update the deployment YAML file with the new image
   - name: 'gcr.io/cloud-builders/gcloud'
