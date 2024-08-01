@@ -45,6 +45,15 @@ steps:
       - commit
       - '-m'
       - 'Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA'
+  - name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      echo "Current directory:"
+      pwd
+      echo "Directory contents:"
+      ls -la
   - name: 'gcr.io/cloud-builders/git'
     dir: '/workspace/repo'
     args:
