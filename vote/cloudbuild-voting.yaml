@@ -15,7 +15,14 @@ steps:
       #- 'CLOUDSDK_CONTAINER_CLUSTER=example-cluster'
   # Step 3: Clone the repository
   - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://github.com/hban1116/example-voting-app.git', '.']
+    args: ['clone', 'https://github.com/hban1116/example-voting-app.git', '/workspace/repo']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "Contents of /workspace/repo:"
+        ls -la /workspace/repo
     
   - name: 'gcr.io/cloud-builders/git'
     entrypoint: 'bash'
@@ -24,18 +31,18 @@ steps:
       - |
         git config --global user.email "harshitbansal1116@gmail.com"
         git config --global user.name "hban1116"
-    
+    dir: '/workspace/repo'
   # Step 4: Update the deployment YAML file with the new image
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
-    
+        sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' /workspace/repo/kubernetes/voting-app-deployment.yaml
+
   # Step 5: Commit and push the changes back to the repository
   - name: 'gcr.io/cloud-builders/git'
-    
+    dir: '/workspace/repo'
     args:
       - add
       - 'k8s-specifications/vote-deployment.yaml'
@@ -55,7 +62,7 @@ steps:
         echo "Directory contents:"
         ls -la
   - name: 'gcr.io/cloud-builders/git'
-    
+    dir: '/workspace/repo'
     args:
       - push
       - 'origin'
