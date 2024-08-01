@@ -52,7 +52,5 @@ steps:
       - 'origin'
       - 'main' # or the appropriate branch
 
-images:
-  - 'gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
