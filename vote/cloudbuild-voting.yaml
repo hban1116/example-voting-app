@@ -15,7 +15,7 @@ steps:
       #- 'CLOUDSDK_CONTAINER_CLUSTER=example-cluster'
   # Step 3: Clone the repository
   - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://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@github.com/hban1116/example-voting-app.git', '/workspace/repo']
+    args: ['clone', 'https://github.com/hban1116/example-voting-app.git', '/workspace/repo']
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
