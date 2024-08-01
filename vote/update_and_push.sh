@@ -22,4 +22,4 @@ git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_
 git remote set-url origin https://github.com/hban1116/example-voting-app.git
 
 # Push the changes
-git push origin main
+git push 
