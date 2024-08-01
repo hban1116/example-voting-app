@@ -20,6 +20,7 @@ git add k8s-specifications/vote-deployment.yaml
 git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA"
 echo "Git remote URL:"
 git remote -v
+git config --list
 
 
 git remote set-url origin https://hban1116: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@github.com/hban1116/example-voting-app.git
