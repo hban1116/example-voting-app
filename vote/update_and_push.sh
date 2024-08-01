@@ -4,8 +4,8 @@
 set -e
 
 # Configure git with user information
-#git config --global user.email "harshitbansal1116@gmail.com"
-#git config --global user.name "hban1116"
+git config --global user.email "harshitbansal1116@gmail.com"
+git config --global user.name "hban1116"
 
 # Change to the repository directory
 cd /workspace/repo
