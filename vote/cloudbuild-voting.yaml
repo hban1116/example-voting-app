@@ -38,7 +38,7 @@ steps:
     args:
       - '-c'
       - |
-        sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' /workspace/repo/kubernetes/voting-app-deployment.yaml
+        sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' /workspace/repo/k8s-specifications/vote-deployment.yaml
 
   # Step 5: Commit and push the changes back to the repository
   - name: 'gcr.io/cloud-builders/git'
