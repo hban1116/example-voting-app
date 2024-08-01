@@ -1,0 +1,15 @@
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA', './vote']
+
+  # Step 2: Push the Docker image to GCR
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA']
+
+  # Step 3: Deploy to GKE
+  #- name: 'gcr.io/cloud-builders/kubectl'
+    #args: ['apply', '-f', 'kubernetes/voting-app-deployment.yaml']
+    #env:
+      #- 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      #- 'CLOUDSDK_CONTAINER_CLUSTER=example-cluster'
