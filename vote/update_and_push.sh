@@ -22,7 +22,7 @@ echo "Git remote URL:"
 git remote -v
 
 
-git remote set-url origin https://hban1116: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@github.com/hban1116/example-voting-app.git
+git remote set-url origin https://hban1116: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@github.com/hban1116/example-voting-app.git
 git remote -v
 # Push the changes
 git push 
