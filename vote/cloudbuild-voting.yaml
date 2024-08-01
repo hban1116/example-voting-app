@@ -24,50 +24,13 @@ steps:
         echo "Contents of /workspace/repo:"
         ls -la /workspace/repo
     
-  - name: 'gcr.io/cloud-builders/git'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        git config --global user.email "harshitbansal1116@gmail.com"
-        git config --global user.name "hban1116"
-        git remote set-url origin https://repo1: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@github.com/hban1116/example-voting-app.git
-    dir: '/workspace/repo'
-  # Step 4: Update the deployment YAML file with the new image
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' /workspace/repo/k8s-specifications/vote-deployment.yaml
-
-  # Step 5: Commit and push the changes back to the repository
-  - name: 'gcr.io/cloud-builders/git'
-    dir: '/workspace/repo'
-    args:
-      - add
-      - 'k8s-specifications/vote-deployment.yaml'
-  - name: 'gcr.io/cloud-builders/git'
-    dir: '/workspace/repo'
-    args:
-      - commit
-      - '-m'
-      - 'Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA'
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        echo "Current directory:"
-        pwd
-        echo "Directory contents:"
-        ls -la
-  - name: 'gcr.io/cloud-builders/git'
-    dir: '/workspace/repo'
-    args:
-      - push
-      - 'origin'
-      - 'main' # or the appropriate branch
+        chmod +x /workspace/repo/vote/update_and_push.sh
+        /workspace/repo/vote/update_and_push.sh
 
 options:
   logging: CLOUD_LOGGING_ONLY
