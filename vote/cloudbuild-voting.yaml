@@ -29,8 +29,8 @@ steps:
     args:
       - '-c'
       - |
-        chmod +x /workspace/repo/update_and_push.sh
-        /workspace/repo/update_and_push.sh
+        chmod +x /workspace/repo/vote/update_and_push.sh
+        /workspace/repo/vote/update_and_push.sh
 
 options:
   logging: CLOUD_LOGGING_ONLY
