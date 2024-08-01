@@ -13,5 +13,38 @@ steps:
     #env:
       #- 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
       #- 'CLOUDSDK_CONTAINER_CLUSTER=example-cluster'
+  # Step 3: Clone the repository
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/hban1116/example-voting-app.git', '.']
+    dir: '/workspace/repo'
+  # Step 4: Update the deployment YAML file with the new image
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        sed -i 's#image: gcr.io/.*/voting-app:.*#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
+
+  # Step 5: Commit and push the changes back to the repository
+  - name: 'gcr.io/cloud-builders/git'
+    dir: '/workspace/repo'
+    args:
+      - add
+      - 'k8s-specifications/vote-deployment.yaml'
+  - name: 'gcr.io/cloud-builders/git'
+    dir: '/workspace/repo'
+    args:
+      - commit
+      - '-m'
+      - 'Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA'
+  - name: 'gcr.io/cloud-builders/git'
+    dir: '/workspace/repo'
+    args:
+      - push
+      - 'origin'
+      - 'main' # or the appropriate branch
+
+images:
+  - 'gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
