@@ -17,10 +17,11 @@ export COMMIT_SHA=$(git rev-parse --short HEAD)
 echo "---------------------------------------"
 echo $PROJECT_ID
 echo "---------------------------------------"
-
+#sed -i "s|image:.*|image: <ACR-REGISTRY-NAME>/$2:$3|g" k8s-specifications/$1-deployment.yaml
 cd /workspace/repo
-sed -i 's|image:.*|image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
+sed -i 's|image:.*|image: gcr.io/'"$PROJECT_ID"'/voting-app:'"$COMMIT_SHA"'|g' k8s-specifications/vote-deployment.yaml
 
+# Step 6: C
 # Add the updated file
 git add .
 
