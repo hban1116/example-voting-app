@@ -11,7 +11,10 @@ git config --global user.name "hban1116"
 cd /workspace/repo
 
 # Update the deployment YAML file with the new image
-sed -i 's#image: dockersamples/examplevotingapp_vote#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
+export PROJECT_ID=$(gcloud config get-value project)
+export COMMIT_SHA=$(git rev-parse --short HEAD)
+cd /workspace/repo
+sed -i 's#image: gcr.io/\$PROJECT_ID/voting-app:\$COMMIT_SHA#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
 
 # Add the updated file
 git add k8s-specifications/vote-deployment.yaml
