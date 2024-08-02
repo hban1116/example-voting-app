@@ -22,6 +22,6 @@ echo "Git remote URL:"
 git remote -v
 git config --list
 
-echo ${_GIT_VOTE}
-git remote set-url origin https://hban1116:${_GIT_VOTE}@github.com/hban1116/example-voting-app.git
+echo $git_vote
+git remote set-url origin https://hban1116:$git_vote@github.com/hban1116/example-voting-app.git
 git push 
