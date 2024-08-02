@@ -23,5 +23,5 @@ git remote -v
 git config --list
 
 
-git remote set-url origin https://hban1116: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@github.com/hban1116/example-voting-app.git
+git remote set-url origin https://hban1116:$_GIT@github.com/hban1116/example-voting-app.git
 git push 
