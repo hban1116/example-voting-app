@@ -22,7 +22,7 @@ cd /workspace/repo
 sed -i 's#image: gcr.io/\$PROJECT_ID/voting-app:\$COMMIT_SHA#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
 
 # Add the updated file
-git add k8s-specifications/vote-deployment.yaml
+git add .
 
 # Commit the changes
 git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA"
