@@ -13,6 +13,11 @@ cd /workspace/repo
 # Update the deployment YAML file with the new image
 export PROJECT_ID=$(gcloud config get-value project)
 export COMMIT_SHA=$(git rev-parse --short HEAD)
+
+echo "---------------------------------------"
+echo $PROJECT_ID
+echo "---------------------------------------"
+
 cd /workspace/repo
 sed -i 's#image: gcr.io/\$PROJECT_ID/voting-app:\$COMMIT_SHA#image: gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA#g' k8s-specifications/vote-deployment.yaml
 
