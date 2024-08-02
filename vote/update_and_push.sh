@@ -21,7 +21,9 @@ git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_
 echo "Git remote URL:"
 git remote -v
 git config --list
-
-echo $git_vote
-git remote set-url origin https://hban1116:$git_vote@github.com/hban1116/example-voting-app.git
+export PAT=$(gcloud secrets versions access latest --secret="git_vote")
+echo "---------------------------------------"
+echo $PAT
+echo "---------------------------------------"
+git remote set-url origin https://hban1116:$PAT@github.com/hban1116/example-voting-app.git
 git push 
