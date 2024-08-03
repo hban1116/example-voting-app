@@ -12,21 +12,20 @@ cd /workspace/repo
 
 # Update the deployment YAML file with the new image
 export PROJECT_ID=$(gcloud config get-value project)
-export COMMIT_SHA=$(git rev-parse --short HEAD)
+export BUILD_ID=$1
 
 echo "---------------------------------------"
 echo $PROJECT_ID
 echo "---------------------------------------"
-#sed -i "s|image:.*|image: <ACR-REGISTRY-NAME>/$2:$3|g" k8s-specifications/$1-deployment.yaml
+# sed -i "s|image:.*|image: <ACR-REGISTRY-NAME>/$2:$3|g" k8s-specifications/$1-deployment.yaml
 cd /workspace/repo
-sed -i 's|image:.*|image: gcr.io/'"$PROJECT_ID"'/voting-app:'"$COMMIT_SHA"'|g' k8s-specifications/vote-deployment.yaml
+sed -i 's|image:.*|image: gcr.io/'"$PROJECT_ID"'/voting-app:'"$BUILD_ID"'|g' k8s-specifications/vote-deployment.yaml
 
-# Step 6: C
 # Add the updated file
 git add .
 
 # Commit the changes
-git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$COMMIT_SHA"
+git commit -m "Update voting-app image to gcr.io/$PROJECT_ID/voting-app:$BUILD_ID"
 echo "Git remote URL:"
 git remote -v
 git config --list
@@ -35,4 +34,4 @@ echo "---------------------------------------"
 echo $PAT
 echo "---------------------------------------"
 git remote set-url origin https://hban1116:$PAT@github.com/hban1116/example-voting-app.git
-git push 
+git push
