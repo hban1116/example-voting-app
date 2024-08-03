@@ -15,7 +15,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: gcr.io/canvas-fulcrum-427208-h3/voting-app:2d1bccc
+      - image: gcr.io/canvas-fulcrum-427208-h3/voting-app:0f44376
         name: vote
         ports:
         - containerPort: 80
