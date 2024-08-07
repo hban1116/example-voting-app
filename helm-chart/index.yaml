@@ -2,11 +2,11 @@ apiVersion: v1
 entries:
   vote-test:
   - apiVersion: v1
-    created: "2024-08-07T08:40:12.073991663Z"
+    created: "2024-08-07T09:11:49.535663294Z"
     description: A Helm chart for Kubernetes
     digest: 5f25ec63162184a028317a7e702b1dd6d57381405029b198524695c2f217bf45
     name: vote-test
     urls:
     - https://raw.githubusercontent.com/hban1116/example-voting-app/main/helm-chart/charts/vote-test-0.1.1.tgz
     version: 0.1.1
-generated: "2024-08-07T08:40:12.073529479Z"
+generated: "2024-08-07T09:11:49.535073233Z"
