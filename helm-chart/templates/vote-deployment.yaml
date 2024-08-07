@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote
+  name: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: gcr.io/canvas-fulcrum-427208-h3/voting-app:a8113b25-e1a8-4135-a52b-3f475a6a97b7
+        name: {{ .Values.title }}
+        ports:
+        - containerPort: 80
+          name: vote
